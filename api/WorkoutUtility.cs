@@ -9,13 +9,12 @@ namespace api
     {
         public static List<Workout> GetAllWorkouts() 
         {
-            SortAllWorkouts();
             List<Workout> workouts = new List<Workout>();
 
             Database db = new Database();
             using var con =new MySqlConnection(db.cs);
             con.Open();
-            string stm = "Select * from workouts;";
+            string stm = "Select * from workouts order by date desc;";
 
             using var cmd = new MySqlCommand(stm, con);
             MySqlDataReader rdr = cmd.ExecuteReader();
@@ -90,21 +89,6 @@ namespace api
             cmd.ExecuteNonQuery();
             con.Close();
         }
-
-        public static void SortAllWorkouts()
-        {
-            Database db = new Database();
-            using var con =new MySqlConnection(db.cs);
-            
-            con.Open();
-            
-            string stm = "Select date from workouts order by date desc limit 3;";
-            using var cmd = new MySqlCommand(stm, con);
-            
-            cmd.ExecuteNonQuery();
-            con.Close();
-        }
-
 
     }
 }

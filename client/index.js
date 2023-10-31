@@ -101,7 +101,7 @@ async function handleWorkoutAdd()
 }
 async function handleWorkoutPin(id)
 {
-   //isnt pinned, sends a 1 so it gets pinned
+   //isnt pinned, sends true so it gets pinned
    let workout = {Id: id, Pinned: true}
    await fetch(url, {
       method: "PUT",
